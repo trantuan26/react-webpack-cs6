@@ -1,74 +1,23 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, { Component } from "react";
+import Account from "./comps/Account.jsx";
+import HomePage from "./comps/HomePage.jsx";
+import Main from "./comps/Main.jsx";
+import Nav from "./comps/Nav.jsx";
+import Transaction from "./comps/Transaction.jsx";
 
-class Note extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
+
+class App extends Component {
     render() {
-        var rowDel = this.props.onRowDel;
         return (
-            <div>
-                <p>{this.props.name}</p>
-                <button onClick={rowDel.bind(this)}>Delete</button>
+            <div className="App">
+              <Account />
+              <HomePage />
+              <Main />
+              <Nav />
+              <Transaction />
             </div>
         );
     }
 }
-
-class NoteForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    handleChange() {
-        this.props.onUserInput(this.refs.filterTextInput.value);
-    }
-
-    render() {
-        return (
-            <div>
-                <input type="text" placeholder="Search..." value={this.props.filterText} ref="filterTextInput"  />
-               <button type="button" onClick={this.handleChange.bind(this)} className="btn btn-success pull-right">Add</button>
-            </div>
-        );
-    }
-}
-
-
-class List extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.state.filterText = "";
-        this.state.items = ["PHP", "Android", "IOS"];
-    }
-
-    handleRowDel(product) {
-        var index = this.state.items.indexOf(product);
-        this.state.items.splice(index, 1);
-        this.setState(this.state.items);
-    };
-
-    handleUserInput(filterText) {
-
-    };
-
-
-    render() {
-        return (
-            <div>
-                <NoteForm filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)}  />
-                {this.state.items.map((e, i) =>
-                    <Note name={e} onRowDel={this.handleRowDel.bind(this)}/>
-                )}
-            </div>
-        );
-    }
-}
-
-ReactDOM.render(
-    <List/>,
-    document.getElementById('root')
-)
+export default App;
