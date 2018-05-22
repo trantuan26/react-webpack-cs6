@@ -1,13 +1,19 @@
-const path = require("path");
-const webpack = require("webpack");
-const bundlePath = path.resolve(__dirname, "public/");
+
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
-    entry:'./app/index.jsx',
-    output:{
-        path: __dirname,
-        filename:'./public/bundle.js'
+    entry: {
+        index: './app/index.jsx',
+        another: './app/app.jsx'
     },
+    output: {
+        path: __dirname,
+        filename: './public/[name].bundle.js'
+    },
+    // plugins: [
+    //     new HTMLWebpackPlugin({
+    //         title: 'Code Splitting'})],
     module: {
         rules: [
             {
@@ -17,7 +23,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [ 'style-loader', 'css-loader' ]
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
